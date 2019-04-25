@@ -18,6 +18,7 @@ class Hindex extends Controller
 
     public function goods()
     {
+        echo "fdhs ";die;
         $attr_id =Request::instance()->param('attr_id');
         // var_dump($attr_id);die;
         $res = Db::query("select * from attribute_value where attr_id = ".$attr_id);
