@@ -14,6 +14,7 @@ use think\Request;
 
         public function login_do()
         {
+            echo 1;die;
             $data = input();
 //            $sql = "select * from user where username='$data[name]' or mobile='$data[name]' or email='$data[name]'";
             $user = db('user')->where('username','=',"$data[username]")->whereOr('mobile','=',"$data[username]")->whereOr('email','=',"$data[username]")->find();
