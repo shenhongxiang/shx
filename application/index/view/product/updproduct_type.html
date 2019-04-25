@@ -1,0 +1,48 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="Copyright" content="Douco Design." />
+    <link href="__STATIC__/index/sp/css/public.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/index/sp/js/jquery.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/index/sp/js/global.js"></script>
+</head>
+<body>
+<div class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+    <h3><a href="product_category" class="actionBtn">商品分类</a>修改分类</h3>
+    <form action="updproduct_types" method="post">
+        <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <input type="hidden" name="id" value="{$data.id}">
+            <tr>
+                <td width="80" align="right">分类名称</td>
+                <td>
+                    <input type="text" name="type_name" value="{$data.type_name}" size="40" class="inpMain" />
+                </td>
+            </tr>
+
+            <tr>
+                <td align="right">所属分类</td>
+                <td>
+                    <select name="parent_id">
+                        <option value="0">父级分类</option>
+                        {foreach $type as $val}
+                        <option value="{$val['id']}">{$val['type_name']}</option>
+                        {foreach $val['son'] as $v}
+                        <option value="{$v['id']}">　{$v['type_name']}</option>
+                        {/foreach}
+                        {/foreach}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <!--<input type="hidden" name="token" value="b9439ae8" />-->
+                    <!--<input type="hidden" name="cat_id" value="" />-->
+                    <input class="btn" type="submit" value="修改" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

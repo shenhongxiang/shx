@@ -1,0 +1,25 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Copyright" content="Douco Design." />
+<link href="__STATIC__/index/sp/css/public.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/index/sp/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATIC__/index/sp/js/global.js"></script>
+</head>
+<body>
+<div class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+        <h3><a href="add" class="actionBtn add">添加分类</a>商品分类</h3>
+         <dl>
+             {foreach $data as $value}
+             <dt>{$value['type_name']}　<a href="save?id={$value['id']}"><button>编辑</button></a>　<a href="del?id={$value['id']}"><button>删除</button></a></dt>
+                 {foreach $value['son'] as $val}
+                 <dd>　{$val['type_name']}　<a href="save?id={$val['id']}"><button>编辑</button></a>　<a href="del?id={$val['id']}"><button>删除</button></a></dd><br/>
+                    {foreach $val['son'] as $v}
+                    <dd>　　{$v['type_name']}　<a href="save?id={$v['id']}"><button>编辑</button></a>　<a href="del?id={$v['id']}"><button>删除</button></a></dd><br/>
+                    {/foreach}
+                {/foreach}
+             {/foreach}
+         </dl>
+</div>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="Generator" content="EditPlus®">
+	<meta name="Author" content="">
+	<meta name="Keywords" content="">
+	<meta name="Description" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+	<meta name="renderer" content="webkit">
+	<title>登录.云购物商城</title>
+	<link rel="shortcut icon" type="__STATIC__/home/image/x-icon" href="img/icon/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="__STATIC__/home/css/base.css" tppabs="http://www.17sucai.com/preview/10221/2017-04-20/yungou/css/base.css">
+	<link rel="stylesheet" type="text/css" href="__STATIC__/home/css/home.css" tppabs="http://www.17sucai.com/preview/10221/2017-04-20/yungou/css/home.css">
+</head>
+<body>
+
+<header id="pc-header">
+	<div class="center">
+		<div class="pc-fl-logo">
+			<h1>
+				<a href="{:url('Hindex/index')}" tppabs="http://www.17sucai.com/preview/10221/2017-04-20/yungou/index.html"></a>
+			</h1>
+		</div>
+	</div>
+</header>
+<section>
+	<div class="pc-login-bj">
+		<div class="center clearfix">
+			<div class="fl"></div>
+			<div class="fr pc-login-box">
+				<div class="pc-login-title"><h2>用户注册</h2></div>
+				<form action="">
+					<div class="pc-sign">
+						<!--<input type="text" name="username" placeholder="用户名">-->
+						<input type="text" id="username" placeholder="用户名：3到6位汉字" name="username"><span id="name" style="color: red;"></span>
+					</div>
+					<div class="pc-sign">
+						<!--<input type="password" name="password" placeholder="请输入您的密码">-->
+						<input type="password" id="userpassword" placeholder="密码：6到20位（字母，数字)" name="password"><span id="pwd" style="color: red;"></span>
+					</div>
+					<div class="pc-sign">
+						<!--<input type="password" name="confirm_password" placeholder="请确认您的密码">-->
+						<input type="password" id="confirmpassword" placeholder="再次输入密码" name="confirm_password"><span id="cpwd" style="color: red;"></span>
+					</div>
+					<div class="pc-sign">
+						<!--<input type="text" name="mobile" placeholder="手机号">-->
+						<input type="tel" id="usertel" placeholder="请输入有效的手机号" name="mobile"><span id="tel" style="color: red;"></span>
+					</div>
+					<div class="pc-sign">
+						<!--<input type="text" name="email" placeholder="邮箱">-->
+						<input type="email" id="useremail" placeholder="请输入有效的邮箱" name="email"><span id="email" style="color: red;"></span>
+					</div>
+					<div class="pc-submit-ss">
+						<input type="button" id="button" value="立即注册" placeholder="">
+						<!--<button type="button" style="width: 100%;height: 50px;background-color: red" id="button">注册</button>-->
+					</div>
+					<div class="pc-item-san clearfix">
+						<a href="#"><img src="__STATIC__/home/img/icon/weixin.png" tppabs="http://www.17sucai.com/preview/10221/2017-04-20/yungou/img/icon/weixin.png" alt="">微信登录</a>
+						<a href="#"><img src="__STATIC__/home/img/icon/weibo.png" tppabs="http://www.17sucai.com/preview/10221/2017-04-20/yungou/img/icon/weibo.png" alt="">微博登录</a>
+						<a href="#" style="margin-right:0"><img src="__STATIC__/home/img/icon/tengxun.png" tppabs="http://www.17sucai.com/preview/10221/2017-04-20/yungou/img/icon/tengxun.png" alt="">QQ登录</a>
+					</div>
+					<div class="pc-reg">
+
+						<a href="{:url('Hlogin/login')}" tppabs="http://www.17sucai.com/preview/10221/2017-04-20/yungou/login.html" class="red">已有账号 请登录</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+<footer>
+	<div class="center">
+		<div class="pc-footer-login">
+			<p>关于我们 招聘信息 联系我们 商家入驻 商家后台 商家社区 ©2017 Yungouwu.com 北京云购物网络有限公司</p>
+			<p style="color:#999">营业执照注册号：990106000129004 | 网络文化经营许可证：北网文（2016）0349-219号 | 增值电信业务经营许可证：京2-20110349 | 安全责任书 | 京公网安备 99010602002329号 </p>
+		</div>
+	</div>
+</footer>
+
+</body>
+</html>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#homes").prop('class','');
+        $("#registercss").attr('class','active');
+    });
+
+    //用户名
+    $(document).on("blur","#username",function () {
+        $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+        var name = $(this).val();
+        if(name==null || name==''){
+            $('#name').html('用户名不能为空');return false;
+        }
+        var patrn = /^[\u4E00-\u9FA5]{3,6}$/;
+        if (!patrn.exec(name)){
+            $('#name').html('3到6位汉字');return false;
+        } else {
+            $('#name').html('<font color="green">√</font>');return true;
+        }
+    });
+    //密码
+    $(document).on("blur","#userpassword",function () {
+        var pwd = $(this).val();
+        if(pwd==null || pwd==''){
+            $('#pwd').html('密码不能为空');return false;
+        }
+        var patrn = /^[a-zA-Z0-9]{6,20}$/;
+        if (!patrn.exec(pwd)){
+            $('#pwd').html('6到20位（字母，数字');return false;
+        } else {
+            $('#pwd').html('<font color="green">√</font>');
+            return true;
+        }
+    });
+    //确认密码
+    $(document).on("blur","#confirmpassword",function () {
+        var pwd = $('#userpassword').val();
+        var cpwd = $(this).val();
+        if (cpwd==null || cpwd=='') {
+            $('#cpwd').html('确认密码不能为空');return false;
+        } else if (cpwd!=pwd){
+            $('#cpwd').html('两次密码不一致');return false;
+        } else {
+            $('#cpwd').html('<font color="green">√</font>');return true;
+        }
+    });
+    //手机号
+    $(document).on("blur","#usertel",function () {
+        var tel = $(this).val();
+        if(tel==null || tel==''){
+            $('#tel').html('手机号不能为空');return false;
+        }
+        var patrn = /^1[34578]\d{9}$/;
+        if (!patrn.exec(tel)){
+            $('#tel').html('手机号格式不正确');return false;
+        } else {
+            $('#tel').html('<font color="green">√</font>');
+            return true;
+        }
+    });
+    //邮箱
+    $(document).on("blur","#useremail",function () {
+        var email = $(this).val();
+        if(email==null || email==''){
+            $('#email').html('邮箱不能为空');return false;
+        }
+        var patrn = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+        if (!patrn.exec(email)){
+            $('#email').html('您输入的不符合邮箱格式');return false;
+        } else {
+            $('#email').html('<font color="green">√</font>');
+            return true;
+        }
+    });
+    //提交
+    $(document).on("click","#button",function(){
+        var username = $('#username').val();
+        var password = $('#userpassword').val();
+        var user_cpwd = $('#confirmpassword').val();
+        var mobile = $('#usertel').val();
+        var email = $('#useremail').val();
+        if (username == '' || password == '' || mobile == '' || email == '' || user_cpwd == '') {
+            $("#username").focus();
+            alert("请将数据填写完整");
+            return false;
+        }
+        $.ajax({
+            type:'post',
+            url:"register_do",
+            data:{username:username,password:password,mobile:mobile,email:email},
+            dataType:'json',
+            success:function(e){
+                if(e.msg == "注册成功"){
+                    alert('注册成功');
+                    window.location.href="login";
+                } else if (e.msg == '邮箱已存在') {
+                    $("#useremail").focus();
+                    $('#email').html('邮箱已存在');
+                } else if (e.msg == '用户名已存在') {
+                    $("#username").focus();
+                    $('#name').html('用户名已存在');
+                } else if (e.msg == '手机号已存在') {
+                    $("#usertel").focus();
+                    $('#tel').html('手机号已存在');
+                }
+            }
+        })
+    })
+
+</script>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>修改数据</title>
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="__STATIC__/index/css/style.css"/>       
+        <link rel="stylesheet" href="__STATIC__/index/assets/css/ace.min.css" />
+        <link rel="stylesheet" href="__STATIC__/index/assets/css/font-awesome.min.css" />
+        <link href="__STATIC__/index/Widget/icheck/icheck.css" rel="stylesheet" type="text/css" />
+		<!--[if IE 7]>
+		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+        <!--[if lte IE 8]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		<![endif]-->
+	    <script src="js/jquery-1.9.1.min.js"></script>
+        <script src="__STATIC__/index/assets/js/bootstrap.min.js"></script>
+        <script src="__STATIC__/index/assets/js/typeahead-bs2.min.js"></script>
+         <script src="__STATIC__/index/assets/layer/layer.js" type="text/javascript"></script>
+        <script type="text/javascript" src="__STATIC__/index/Widget/swfupload/swfupload.js"></script>
+        <script type="text/javascript" src="__STATIC__/index/Widget/swfupload/swfupload.queue.js"></script>
+        <script type="text/javascript" src="__STATIC__/index/Widget/swfupload/swfupload.speed.js"></script>
+        <script type="text/javascript" src="__STATIC__/index/Widget/swfupload/handlers.js"></script>
+</head>
+<body>
+<div class=" clearfix">
+<div id="add_brand" class="clearfix">
+	<form action="{:url('product/upd_brandPro')}" method="post" enctype="multipart/form-data">
+	   	<div class="left_add">
+		   <center><h3>修改品牌</h3></center>
+		   <ul class="add_conent">
+		   	<li><input type="hidden" name="id" value="{$data['id']}"></li>
+		    <li class=" clearfix"><label class="label_name"><i>*</i>品牌名称：</label> <input name="b_name" type="text" class="add_text" value="{$data['b_name']}"/></li>
+		    <li class=" clearfix"><label class="label_name">品牌图片：</label>
+		           <div class="demo l_f">
+		               <input type="file" name="b_logo" />
+		           </div>        
+		    </li>
+		         <li class=" clearfix"><label class="label_name"><i>*</i>所属地区：</label> <input name="b_area" type="text" class="add_text" style="width:120px" value="{$data['b_area']}"/></li>
+		         <li class=" clearfix"><label class="label_name">品牌描述：</label> <textarea name="b_content" cols="" rows="" class="textarea" onkeyup="checkLength(this);">{$data['b_content']}</textarea><span class="wordage">剩余字数：<span id="sy" style="color:Red;">500</span>字</span></li>
+		         <li class=" clearfix"><label class="label_name"><i>*</i>显示状态：</label> 
+		         <label><input name="b_state" value="1" type="radio" class="ace" checked="checked"><span class="lbl">显示</span></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		         <label><input type="radio" class="ace" name="b_state" value="0"><span class="lbl">不显示</span></label>
+		         </li>
+		   </ul>
+		</div>
+		<div class="button_brand" style="margin-left:-370px;"><input type="submit"  class="btn btn-warning" value="修改"/><input type="reset" value="取消" class="btn btn-warning"/></div>
+	</form>
+</div>
+</div>
+</body>
+</html>

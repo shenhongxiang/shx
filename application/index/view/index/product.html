@@ -1,0 +1,116 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Copyright" content="Douco Design." />
+<link href="__STATIC__/index/sp/css/public.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/index/sp/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATIC__/index/sp/js/global.js"></script>
+<script type="text/javascript" src="__STATIC__/index/sp/js/jquery.autotextarea.js"></script>
+</head>
+<body>
+<div id="dcWrap">
+     <div class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+         <h3><a href="{:url('index/index/addproduct')}" class="actionBtn add">添加商品</a></h3>
+         <div class="filter">
+             <form action="" method="">
+                 <input name="keyword" type="text" class="inpMain" size="20" />
+                 <input class="btnGray" type="submit" value="筛选商品" />
+             </form>
+         </div>
+         <div id="list">
+             <form name="action" method="post" action="product.php?rec=action">
+                 <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+                     <tr>
+                         <th width="22" align="center"><input name='chkall' type='checkbox' id='chkall' onclick='selectcheckbox(this.form)' value='check'></th>
+                         <th width="40" align="center">编号</th>
+                         <th align="left">商品名称</th>
+                         <th width="150" align="center">商品分类</th>
+                         <!--<th width="80" align="center">添加日期</th>-->
+                         <th width="80" align="center">操作</th>
+                     </tr>
+                     <tbody class="tbody">
+                         {volist id="data" name="data"}
+                         <tr class="{$data.id}">
+                             <td align="center"><input type="checkbox" name="checkbox[]"/></td>
+                             <td align="center">{$data.id}</td>
+                             <td><a href="#">{$data.proname}</a></td>
+                             <td align="center"><a href="#">{$data.type_name}</a></td>
+                             <!--<td align="center">2013-06-26</td>-->
+                             <td align="center">
+                                 <a href="{:url('index/product/updproduct')}?id={$data.id}">编辑</a> | <a href="#" onclick="del_one({$data.id})">删除</a>
+                             </td>
+                         </tr>
+                         {/volist}
+                     </tbody>
+                 </table>
+             </form>
+         </div>
+         <div class="clear"></div>
+         <div class="pager">
+             <!--总计 $count 个记录，共 1 页，当前第 1 页 | <a href="product.php?page=1">第一页</a> 上一页 下一页 <a href="product.php?page=1">最末页</a>-->
+                 <span >总计 {$count} 个记录，共 {$page.total} 页，当前第<span class="page">1</span>页</span>
+             <button pager="1" class="first">首页</button>
+             <button pager="{$page['last']}" class="last">上一页</button>
+             <button pager="{$page['next']}" class="next">下一页</button>
+             <button pager="{$page['total']}" class="total">尾页</button>
+         </div>
+     </div>
+</div>
+<script type="text/javascript">
+    //分页
+    $('.pager button').click(function () {
+        var pager = $(this).attr('pager');
+        page(pager);
+    });
+    function page(pager) {
+        //如果能从某处得到值，就能在它前面加上 @ 运算符。例如，可以把它放在变量，函数和 include() 调用，常量，等等之前。不能把它放在函数或类的定义之前，也不能用于条件结构例如 if 和 foreach 等。
+                 //url                         //data        回执函数function
+        $.get("product",{pager:pager,keyword:"<?php echo @$_GET['keyword']?$_GET['keyword']:'0'; ?>"},function (data) {
+
+            var str = '';
+            //each循环数据
+            $.each(data.data,function (i,v) {
+                console.log(v);
+                str += '<tr class=>'+v.id+'>\
+                       <td align="center"><input type="checkbox" name="checkbox[]"/></td>\
+                       <td align="center">'+v.id+'</td>\
+                       <td><a href="#">'+v.proname+'</a></td>\
+                       <td align="center"><a href="#">'+v.type_name+'</a></td>\
+                       <td align="center"><a href="{:url('index/product/updproduct')}?id='+v.id+'">编辑</a> | <a href="#" onclick="del_one('+v.id+')">删除</a> </td>\
+                       </tr>';
+                $('.tbody').html(str);
+                $('.last').attr('pager',data.page.last);
+                $('.next').attr('pager',data.page.next);
+                $('.total').attr('pager',data.page.total);
+                $('.page').html(data.pager);
+            });
+        },'json')
+    }
+
+    function del_one(id){
+
+        if(confirm("确定要删除商品吗?")){
+            //测试事件是否绑定成功
+            // alert(id);
+            $.ajax({
+                //数据传输方式
+                type:'get',
+                //传输路径
+                url:"{:url('index/product/delproduct')}",
+                //传输数据
+                data:{id:id},
+                success:function (data) {
+                    if(data == 1){
+                        $('.'+id).remove();
+                        alert('商品删除成功');
+                    }else if(data == 2){
+                        alert('商品删除失败');
+                    }
+                }
+            })
+        }
+    }
+
+</script>
+</body>
+</html>
